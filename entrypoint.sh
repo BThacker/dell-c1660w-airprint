@@ -14,13 +14,38 @@ PAGE_SIZE="${PAGE_SIZE:-Letter}"
 COLOR_MODE="${COLOR_MODE:-Color}"
 PRINTER_PORT="${PRINTER_PORT:-9100}"
 
-# Listen on all interfaces and accept clients arriving through Docker's NAT.
-sed -i \
-  -e 's/^Listen localhost:631/Listen 0.0.0.0:631/' \
-  -e 's/^Listen 127.0.0.1:631/Listen 0.0.0.0:631/' \
-  -e 's/Allow @LOCAL/Allow all/' \
-  /etc/cups/cupsd.conf
-grep -q '^ServerAlias' /etc/cups/cupsd.conf || echo 'ServerAlias *' >> /etc/cups/cupsd.conf
+# Write a known-good cupsd.conf: listen on all interfaces and allow any client
+# (the container is only reachable through the published port). This avoids
+# relying on the distro's default access rules, which can reject IPP/HTTP with
+# 403 and make AirPrint clients report the printer as offline.
+mkdir -p /run/cups
+cat > /etc/cups/cupsd.conf <<'EOF'
+LogLevel warn
+MaxLogSize 0
+Listen 0.0.0.0:631
+Listen /run/cups/cups.sock
+Browsing Off
+DefaultAuthType Basic
+WebInterface Yes
+ServerAlias *
+
+<Location />
+  Order allow,deny
+  Allow all
+</Location>
+
+<Location /admin>
+  Order allow,deny
+  Allow all
+</Location>
+
+<Location /admin/conf>
+  AuthType Default
+  Require user @SYSTEM
+  Order allow,deny
+  Allow all
+</Location>
+EOF
 
 echo "Starting cupsd..."
 /usr/sbin/cupsd -f &
