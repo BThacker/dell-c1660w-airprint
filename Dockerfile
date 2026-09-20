@@ -41,7 +41,6 @@ RUN apt-get update \
         cups-filters \
         cups-ipp-utils \
         ghostscript \
-        foomatic-filters \
         dc \
  && rm -rf /var/lib/apt/lists/*
 
