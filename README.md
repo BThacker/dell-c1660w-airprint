@@ -58,7 +58,8 @@ existing Avahi, so no multicast mDNS runs inside the container.
 A multi-arch (`linux/amd64`, `linux/arm64`) image is published to GHCR by
 `.github/workflows/publish.yml`. Make the package public once under
 **Package settings → Change visibility → Public**, then use `compose.ghcr.yaml`
-(or paste its `services:` block into a Dockge stack):
+(or paste its entire contents into a Dockge stack — keep the top-level
+`volumes:` section):
 
 ```sh
 docker pull ghcr.io/bthacker/dell-c1660w-airprint:latest
