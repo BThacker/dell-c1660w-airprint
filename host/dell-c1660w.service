@@ -3,6 +3,9 @@
 <!--
   Advertises the containerized CUPS queue as an AirPrint printer.
   Install with host/install-airprint.sh; adjust the queue name if needed.
+
+  The URF/pdl/kind records are what iOS looks for when deciding whether a
+  discovered _ipp._tcp service is an AirPrint printer. Keep them.
 -->
 <service-group>
   <name replace-wildcards="yes">Dell C1660w Native</name>
@@ -16,10 +19,13 @@
     <txt-record>ty=Dell C1660w Native</txt-record>
     <txt-record>note=AirPrint bridge (Docker)</txt-record>
     <txt-record>product=(Dell C1660w)</txt-record>
-    <txt-record>pdl=application/pdf,image/jpeg</txt-record>
+    <txt-record>pdl=application/pdf,image/urf,image/jpeg</txt-record>
+    <txt-record>URF=CP1,MT1-2,RS300-600,SRGB24,W8,OFU0</txt-record>
+    <txt-record>kind=document,envelope,photo</txt-record>
     <txt-record>Color=T</txt-record>
     <txt-record>Duplex=F</txt-record>
     <txt-record>copies=T</txt-record>
     <txt-record>media=na_letter_8.5x11in,iso_a4_210x297mm</txt-record>
+    <txt-record>UUID=c1660a00-0000-4000-8000-0000c1660a00</txt-record>
   </service>
 </service-group>

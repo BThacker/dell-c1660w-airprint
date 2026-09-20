@@ -146,8 +146,12 @@ avahi-browse -rt _ipp._tcp
 - **`port is already allocated`.** Something already binds 631 (often CUPS on
   the host); stop it or change the published port and the Avahi `<port>`.
 - **`undefined volume cups-etc`.** You omitted the top-level `volumes:` block.
-- **Printer appears but jobs stall.** This bridge advertises PDF, not Apple
-  Raster (URF). Leave `pdl=application/pdf` in the Avahi file unchanged.
+- **iPhone doesn't list the printer, but a Mac's `dns-sd -B _ipp._tcp` does.**
+  iOS only lists `_ipp._tcp` services that carry the AirPrint TXT records
+  (`URF`, `pdl=…,image/urf,…`, `kind`). Keep those in
+  [`host/dell-c1660w.service`](host/dell-c1660w.service) and re-run
+  `./host/install-airprint.sh` after editing. Jobs are still sent as PDF and
+  converted to HBPL1 by CUPS.
 - **Garbled or wrong-size output.** The C1660w expects 600 dpi on Letter/A4 —
   use the bundled PPD and defaults.
 
