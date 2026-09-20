@@ -53,6 +53,17 @@ existing Avahi, so no multicast mDNS runs inside the container.
 4. On your iPhone/iPad, open a document, choose **Print**, and select
    **Dell C1660w Native**.
 
+### Prebuilt image (no local build)
+
+A multi-arch (`linux/amd64`, `linux/arm64`) image is published to GHCR by
+`.github/workflows/publish.yml`. Make the package public once under
+**Package settings → Change visibility → Public**, then use `compose.ghcr.yaml`
+(or paste its `services:` block into a Dockge stack):
+
+```sh
+docker pull ghcr.io/bthacker/dell-c1660w-airprint:latest
+```
+
 ## Configuration
 
 Set these under `environment:` in `compose.yaml`.
