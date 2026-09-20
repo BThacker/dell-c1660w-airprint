@@ -1,0 +1,18 @@
+services:
+  cups:
+    image: ghcr.io/bthacker/dell-c1660w-airprint:latest
+    container_name: dell-c1660w-airprint
+    restart: unless-stopped
+    ports:
+      - "631:631"
+    environment:
+      PRINTER_IP: "192.168.1.50"
+      QUEUE: "dell-c1660w"
+      PAGE_SIZE: "Letter"
+      COLOR_MODE: "Color"
+      LOCATION: "Docker host"
+    volumes:
+      - cups-etc:/etc/cups
+
+volumes:
+  cups-etc:
