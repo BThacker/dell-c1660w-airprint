@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE service-group SYSTEM "avahi-service.dtd">
+<!--
+  Advertises the containerized CUPS queue as an AirPrint printer.
+  Install with host/install-airprint.sh; adjust the queue name if needed.
+-->
+<service-group>
+  <name replace-wildcards="yes">Dell C1660w Native</name>
+  <service>
+    <type>_ipp._tcp</type>
+    <subtype>_universal._sub._ipp._tcp</subtype>
+    <port>631</port>
+    <txt-record>txtvers=1</txt-record>
+    <txt-record>qtotal=1</txt-record>
+    <txt-record>rp=printers/dell-c1660w</txt-record>
+    <txt-record>ty=Dell C1660w Native</txt-record>
+    <txt-record>note=AirPrint bridge (Docker)</txt-record>
+    <txt-record>product=(Dell C1660w)</txt-record>
+    <txt-record>pdl=application/pdf,image/jpeg</txt-record>
+    <txt-record>Color=T</txt-record>
+    <txt-record>Duplex=F</txt-record>
+    <txt-record>copies=T</txt-record>
+    <txt-record>media=na_letter_8.5x11in,iso_a4_210x297mm</txt-record>
+  </service>
+</service-group>
