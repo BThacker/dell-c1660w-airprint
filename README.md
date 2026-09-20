@@ -32,7 +32,7 @@ existing Avahi, so no multicast mDNS runs inside the container.
 
 ## Quick start
 
-1. Edit `docker-compose.yml` and set `PRINTER_IP` to your printer's address
+1. Edit `compose.yaml` and set `PRINTER_IP` to your printer's address
    (and `PAGE_SIZE`/`COLOR_MODE` if you like).
 
 2. Build and start CUPS:
@@ -55,7 +55,7 @@ existing Avahi, so no multicast mDNS runs inside the container.
 
 ## Configuration
 
-Set these under `environment:` in `docker-compose.yml`.
+Set these under `environment:` in `compose.yaml`.
 
 | Variable | Default | Meaning |
 | --- | --- | --- |
